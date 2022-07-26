@@ -1,0 +1,47 @@
+-- Database: db_interagua
+
+-- DROP DATABASE IF EXISTS db_interagua;
+
+-- CREATE DATABASE db_interagua;
+    
+    
+CREATE TABLE rol(
+    id BIGSERIAL PRIMARY KEY,
+    nombre VARCHAR(50)
+);    
+
+CREATE TABLE usuario(
+    id BIGSERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(50) NOT NULL,
+    role BIGINT NOT NULL REFERENCES rol(id),
+    fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE vivienda(
+    id BIGSERIAL PRIMARY KEY,
+    codigo VARCHAR(150) NOT NULL UNIQUE,
+    direccion VARCHAR(150) NOT NULL,
+    mz VARCHAR(150) NOT NULL,
+    villa VARCHAR(150) NOT NULL,
+    
+);
+
+CREATE TABLE registro(
+    id BIGSERIAL PRIMARY KEY,
+    idUsuario BIGINT NOT NULL REFERENCES usuario(id) ON DELETE CASCADE,
+    codigoVivienda NOT NULL REFERENCES vivienda(codigo) ON DELETE CASCADE,
+    imagen VARCHAR(150) NOT NULL,
+    lectura VARCHAR(150),
+    gps VARCHAR(150),
+    fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE tareas(
+    id BIGSERIAL PRIMARY KEY,
+    idUsuario BIGINT NOT NULL REFERENCES usuario(id) ON DELETE CASCADE,
+    titulo VARCHAR(150) NOT NULL,
+    descripcion VARCHAR(150) NOT NULL,
+    fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    
+);
