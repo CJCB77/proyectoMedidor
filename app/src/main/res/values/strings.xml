@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Registro Medidor de Luz</string>
+    <string name="title">CNEL</string>
+    <string name="txtUsername">Usuario:</string>
+    <string name="txtPassword">Contraseña:</string>
+    <string name="inputUsername">Usuario</string>
+    <string name="inputPassword">Contraseña</string>
+    <string name="btnLogin">Iniciar Sesion</string>
+
+    <string name="txtCodigoViv">Codigo Vivienda:</string>
+    <string name="txtFechaCreacion">Fecha de toma:</string>
+    <string name="txtLectura">Lectura de Medidor:</string>
+
+    <string name="menuSalir">Salir:</string>
+    <string name="menuNuevoRegistro">Nuevo Registro:</string>
+    <string name="menuTareas">Tareas:</string>
+    <string name="txtDescripcion">Descripcion:</string>
+
+    <string name="txtNuevoRegistro">Nuevo Registro</string>
+    <string name="inputVivienda">Codigo de la vivienda</string>
+    <string name="txtFoto">Foto de medidor:</string>
+    <string name="btnUploadImg">Tomar foto</string>
+    <string name="txtGps">GPS:</string>
+    <string name="inputGps">Coordenadas</string>
+    <string name="btnNuevoRegistro">Crear Registro</string>
+    <string name="btnUploadGallery">Subir Foto</string>
+
+
+
+</resources>
