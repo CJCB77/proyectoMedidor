@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Johlou</title>
+    <!-- BOX ICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="./css/estilos.css">
+    <!-- CUSTOM JS -->
+    <script src="./js/app.js" defer></script>
+</head>
+<body style="background: #eee">
+    <div class="contenedor-division">
+        <div class="wrapper">
+            <nav class="navbar navbar-expand-md navbar-light bg-light py-1">
+                <div class="container-fluid" style="background: center;">
+                    <!-- <button class="btn btn-default" id="btn-slider" type="button">
+                        <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+                    </button> 
+                    < <a class="navbar-brand me-auto text-danger" href="#">Joh<span class="text-warning">Lou</span></a> -->
+                    
+                    <div>
+                        <!-- class="img-user" -->
+                        <img src="./img/jl3.png" alt=""  class="img-user img-fluid">
+                    </div>
+                    <ul class="nav ms-auto">
+                        
+                        <li class="nav-item dropstart">
+                            <a class="nav-link text-dark ps-3 pe-1" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown">
+                                <img src="./img/user.png" alt="user" class="img-user">
+                            </a>
+                            <div class="dropdown-menu mt-2 pt-0" aria-labelledby="navbarDropdown">
+                                <div class="d-flex p-3 border-bottom mb-2">
+                                    <img src="./img/user.png" alt="user" class="img-user me-2">
+                                    <div class="d-block">
+                                        <p class="fw-bold m-0 lh-1" id="currentUser"></p>
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-user fa-lg me-3" aria-hidden="true"></i>Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-cog fa-lg me-3" aria-hidden="true"></i>Ajustes
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="#">
+									<button class="btn btn-danger" id="btnLogout" >Cerrar sesion</button>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="menu-dashboard" >
+                <!-- TOP MENU -->
+                <div class="top-menu">
+                    <div class="logo">
+                        <span>Bienvenido Admin</span>
+                    </div>
+                    <div class="toggle">
+                        <i class='bx bx-menu'></i>
+                    </div>
+                </div>
+                
+                <!-- INPUT SEARCH -->
+                <div class="input-search">
+                    <i class='bx bx-search'></i>
+                    <input type="text" class="input" placeholder="Buscar">
+                </div>
+                <!-- MENU -->
+                <div class="menu">
+                    <div class="enlace">
+                        <i class="bx bx-message-square"></i>
+                        <span><a href="main.html">Inicio</a></span>
+
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-user"></i>
+                        <!-- <span>Usuarios</span> -->
+                        <span><a href="#">Usuarios</a></span>
+                        
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-grid-alt"></i>
+                        <!-- <span>Listar Regristros</span> -->
+                        <span><a href="listar.html">Listar Registros</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-grid-alt"></i>
+                        <!-- <span>Asignar Tareas</span> -->
+                        <span><a href="asignartareas.html">Asignar Tareas</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-grid-alt"></i>
+                        <!-- <span>Vivienda</span> -->
+                        <span><a href="vivienda.html">Vivenda</a></span>
+                    </div>
+                </div>    
+            </div>
+        </div>
+
+        <main class="espa">
+            <div>
+                <h1 class="tittle dash"> Dashboard </h1>
+            </div>
+			<div class="head-title dash">
+				<div class="left">
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Usuarios</a>
+						</li>
+					</ul>
+				</div>
+                
+			</div>
+        
+		<div id="app">
+			<div class="container">
+				<table class="table table-striped" style="width:100%">
+					<thead>
+						<th style="width: 20%;">Id</th>
+						<th style="width: 20%;">Usuario</th>
+						<th style="width: 20%;">Contraseña</th>
+						<th style="width: 20%;">Rol</th>
+						<th style="width: 10%;"></th>
+						<th style="width: 10%;"><btn class="btn btn-secondary"
+							data-bs-toggle="modal" data-bs-target="#exampleModal">
+							Agregar usuario
+						</btn></th>
+					</thead>
+					<tbody>
+						<tr v-for="(usuario, index) in usuarios">
+							<td style="width: 20%;">{{usuario.id}}</td>
+							<td style="width: 20%;">{{usuario.username}}</td>
+							<td style="width: 20%;">{{usuario.password}}</td>
+							<td style="width: 20%;">{{usuario.rol}}</td>
+							<td style="width: 10%;"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarModal" @click="editarUsuario(index)">Editar usuario</button></td>
+							<td style="width: 10%;"><button type="button" class="btn btn-danger" @click="borrarUsuario(index)">Borrar usuario</button></td>
+						</tr>
+					</tbody>
+				</table>
+
+
+
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <h5 class="modal-title" id="exampleModalLabel">Modal Crear</h5>
+						  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+						  <div class="row">
+							<div class="col">
+								<h5>id:</h5>
+								<input type="text" v-model="id">
+							</div>
+							<div class="col">
+								<h5>usuario:</h5>
+								<input type="text" v-model="username">
+							</div>
+							<div class="col">
+								<h5>password:</h5>
+								<input type="text"v-model="password">
+							</div>
+							<div class="col">
+								<h5>Rol:</h5>
+								<input type="text"v-model="rol">
+							</div>
+						  </div>
+						</div>
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="limpiar">Close</button>
+						  <button type="button" class="btn btn-primary" @click="agregarUsuario">Save changes</button>
+						</div>
+					  </div>
+					</div>
+				</div>
+				<div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <h5 class="modal-title" id="exampleModalLabel">Modal Editar</h5>
+						  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+						  <div class="row">
+							<div class="col">
+								<h5>id:</h5>
+								<input disabled type="text" v-model="id">
+							</div>
+							<div class="col">
+								<h5>usuario:</h5>
+								<input type="text" v-model="username">
+							</div>
+							<div class="col">
+								<h5>password:</h5>
+								<input type="text"v-model="password">
+							</div>
+							<div class="col">
+								<h5>Rol:</h5>
+								<input type="text"v-model="rol">
+							</div>
+						  </div>
+						</div>
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="limpiar">Close</button>
+						  <button type="button" class="btn btn-primary" @click="actualizar">Save changes</button>
+						</div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</main>   
+    </div>         
+            
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	<script>
+		const app = new Vue({
+			el:'#app',
+			data:{
+				usuarios:[
+					
+				],
+
+				editar:false,
+				id:"",
+				username:'',
+				password:'',
+				rol:''
+			},
+			mounted(){
+				this.obtenerUsuarios();
+				var user = localStorage.getItem('username');
+        		var user = JSON.parse(user);
+        		document.getElementById('currentUser').innerHTML = user;
+
+				document.getElementById('btnLogout').addEventListener('click', function(){
+            	localStorage.removeItem('username');
+            	localStorage.removeItem('token');
+            	window.location.href = 'index.html';
+        	});
+			},
+			methods:{
+				obtenerUsuarios(){
+					//fetch('url').then(response=>{
+					//	for(dato in response.data)
+					//		this.usuarios.push({id:dato.id, username:dato.username, password:dato.password,})
+					//});
+					// Fetch http://localhost:3000/api/usuarios for users
+					//Add token to header from localStorage
+					fetch('http://localhost:3000/api/usuarios',{
+						headers:{
+							'authorization':localStorage.getItem('token')
+						}
+					})
+						.then(response => response.json())
+						.then(data => {
+							for(dato in data){
+								let username = data[dato].username;
+								let password = data[dato].password;
+								let rol = data[dato].role;
+
+								if(password.length >= 10){
+									//Substring first 10 chars
+									password = password.substring(0,10) + '...';
+								}
+								if(rol == 1){
+									rol = 'Admin';
+								}else{
+									rol = 'User';
+								}
+								
+								this.usuarios.push({
+									id:data[dato].id, 
+									username:username, 
+									password:password,
+									rol:rol
+								})
+							}
+								
+						});
+		
+
+				},
+				borrarUsuario(index){
+					// this.usuarios.splice(index,1)
+					// console.log(index);
+					//Get user id and delete it from the database
+					let id = this.usuarios[index].id;
+					fetch('http://localhost:3000/api/usuarios/delete/'+id,{
+						method:'DELETE',
+						headers:{
+							'authorization':localStorage.getItem('token')
+						}
+					}).then(response=>{
+						this.usuarios.splice(index,1);
+					});
+
+				},
+				editarUsuario(index){
+					this.editar=true;
+					this.id= this.usuarios[index].id;
+					this.username= this.usuarios[index].username;
+					this.password= this.usuarios[index].password;
+					if(this.usuarios[index].rol == "Admin"){
+						this.rol = 1;
+					}else{
+						this.rol = 2;
+					}
+				
+				},
+				actualizar(){
+					// if(this.id != "" && this.username !="" && this.password!="" && this.editar){
+					// 	let index = this.indexWhere(this.usuarios , usuario => usuario.id == this.id)
+					
+					// 	this.usuarios[index]={id:this.id, username:this.username, password:this.password}
+					// 	this.limpiar();
+					// }
+					//Update the user in the database
+					fetch('http://localhost:3000/api/usuarios/update/'+ this.id,{
+						method:'PUT',
+						headers:{
+							'Content-Type':'application/json',
+							'authorization':localStorage.getItem('token')
+						},
+						body:JSON.stringify({
+							username:this.username,
+							password:this.password,
+							role:this.rol
+						})
+					}).then(response=>{
+						//Update the user in the array
+						let index = this.indexWhere(this.usuarios , usuario => usuario.id == this.id)
+						if(this.rol == 1){
+							this.rol = 'Admin';
+						}else{
+							this.rol = 'User';
+						}
+						this.usuarios[index]={id:this.id, username:this.username, password:this.password, rol:this.rol}
+						this.limpiar();
+
+					});
+				},
+				agregarUsuario(){
+					// if(this.id != "" && this.username !="" && this.password!="" && !this.rol && !this.editar ){
+					// 	this.usuarios.push({id:this.id, username:this.username, password:this.password, rol:this.rol})
+					// 	this.limpiar();
+					// }
+					//Post http://localhost:3000/api/auth/register new user
+					fetch('http://localhost:3000/api/auth/register',{
+						method:'POST',
+						headers:{
+							'Content-Type':'application/json',
+							'authorization':localStorage.getItem('token')
+						},
+						body:JSON.stringify({
+							username:this.username,
+							password:this.password,
+							role:this.rol
+						})
+					})
+						.then(response => response.json())
+						.then(data => {
+							this.usuarios.push({ 
+								id:data.id,
+								username:data.username, 
+								password:data.password.substring(0,10) + '...',
+								rol:data.role
+							})
+							
+							this.limpiar();
+						});
+
+						
+				},
+				indexWhere(array, conditionFn) {
+					const item = array.find(conditionFn)
+					return array.indexOf(item)
+				},
+
+				limpiar(){
+					this.id="";
+					this.username="";
+					this.password="";
+					this.rol="";
+					this.editar=false;
+				}
+			}
+
+		})
+	</script>
+
+</body >
+</html>

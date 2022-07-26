@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Johlou</title>
+    <!-- BOX ICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="./css/estilos.css">
+    <!-- CUSTOM JS -->
+    <script src="./js/app.js" defer></script>
+</head>
+<body style="background: #eee">
+    <div class="contenedor-division">
+        <div class="wrapper">
+            <nav class="navbar navbar-expand-md navbar-light bg-light py-1">
+                <div class="container-fluid" style="background: center;">
+                    <!-- <button class="btn btn-default" id="btn-slider" type="button">
+                        <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+                    </button> 
+                    < <a class="navbar-brand me-auto text-danger" href="#">Joh<span class="text-warning">Lou</span></a> -->
+                    
+                    <div>
+                        <!-- class="img-user" -->
+                        <img src="./img/jl3.png" alt=""  class="img-user img-fluid">
+                    </div>
+                    <ul class="nav ms-auto">
+                        
+                        <li class="nav-item dropstart">
+                            <a class="nav-link text-dark ps-3 pe-1" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown">
+                                <img src="./img/user.png" alt="user" class="img-user">
+                            </a>
+                            <div class="dropdown-menu mt-2 pt-0" aria-labelledby="navbarDropdown">
+                                <div class="d-flex p-3 border-bottom mb-2">
+                                    <img src="./img/user.png" alt="user" class="img-user me-2">
+                                    <div class="d-block">
+                                        <p class="fw-bold m-0 lh-1" id="currentUser"></p>
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-user fa-lg me-3" aria-hidden="true"></i>Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-cog fa-lg me-3" aria-hidden="true"></i>Ajustes
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="#">
+									<button class="btn btn-danger" id="btnLogout" >Cerrar sesion</button>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="menu-dashboard" >
+                <!-- TOP MENU -->
+                <div class="top-menu">
+                    <div class="logo">
+                        <span>Bienvenido Admin</span>
+                    </div>
+                    <div class="toggle">
+                        <i class='bx bx-menu'></i>
+                    </div>
+                </div>
+                
+                <!-- INPUT SEARCH -->
+                <div class="input-search">
+                    <i class='bx bx-search'></i>
+                    <input type="text" class="input" placeholder="Buscar">
+                </div>
+                <!-- MENU -->
+				<div class="menu">
+                    <div class="enlace">
+                        <i class="bx bx-message-square"></i>
+                        <span><a href="main.html">Inicio</a></span>
+
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-user"></i>
+                        <!-- <span>Usuarios</span> -->
+                        <span><a href="usuarios.html">Usuarios</a></span>
+                        
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-grid-alt"></i>
+                        <!-- <span>Listar Regristros</span> -->
+                        <span><a href="listar.html">Listar Registros</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-grid-alt"></i>
+                        <!-- <span>Asignar Tareas</span> -->
+                        <span><a href="asignartareas.html">Asignar Tareas</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-grid-alt"></i>
+                        <!-- <span>Vivienda</span> -->
+                        <span><a href="#">Vivenda</a></span>
+                    </div>
+                </div>    
+            </div>
+        </div>
+		
+
+        <main class="espa">
+            <div>
+                <h1 class="tittle dash"> Dashboard </h1>
+            </div>
+			<div class="head-title dash">
+				<div class="left">
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Vivienda</a>
+						</li>
+					</ul>
+				</div>
+                
+			</div>
+			<div id="app">
+				<div class="container">
+					<table class="table table-striped" style="width:100%; ">
+						<thead>
+							<th style="width: 20%;">Codigo</th>
+							<th style="width: 20%;">Direccion</th>
+							<th style="width: 10%; text-align: center;">Villa</th>
+							<th style="width: 10%; text-align: center;">Mz</th>
+							<th style="width: 20%; text-align: center;"></th>
+							<th style="width: 20%; text-align: center;"><btn class="btn btn-secondary"
+								data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar Vivienda
+							</btn></th>
+						</thead>
+						<tbody >
+							<tr v-for="(vivienda, index) in creandoViviendas">
+								<td style="width: 20%;">{{vivienda.codigo}}</td>
+								<td style="width: 20%;">{{vivienda.direccion}}</td>
+								<td style="width: 10%; text-align: center;">{{vivienda.villa}}</td>
+								<td style="width: 10%; ">{{vivienda.mz}}</td>
+								<td style="width: 20%;text-align: center;"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarModal" @click="editarVivienda(index)">Editar Vivienda</button></td>
+								<td style="width: 20%;text-align: center;"><button type="button" class="btn btn-danger" @click="borrarVivienda(index)">Borrar Vivienda</button></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Modal Crear</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+								<div class="row">
+									<div class="col">
+										<h5>Codigo:</h5>
+										<input type="text" v-model="codigo">
+									</div>
+									<div class="col">
+										<h5>Direccion:</h5>
+										<input type="text" v-model="direccion">
+									</div>
+									<div class="col">
+										<h5>Mz:</h5>
+										<input type="text"v-model="mz">
+									</div>
+									<div class="col">
+										<h5>Villa:</h5>
+										<input type="text"v-model="villa">
+									</div>
+								</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="limpiar">Close</button>
+									<button type="button" class="btn btn-primary" @click="agregarVivienda">Save changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> 
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Modal Editar</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col">
+											<h5>Codigo:</h5>
+											<input type="text" v-model="codigo">
+										</div>
+										<div class="col">
+											<h5>Direccion:</h5>
+											<input type="text" v-model="direccion">
+										</div>
+										<div class="col">
+											<h5>Mz:</h5>
+											<input type="text"v-model="mz">
+										</div>
+										<div class="col">
+											<h5>Villa:</h5>
+											<input type="text"v-model="villa">
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="limpiar">Close</button>
+								<button type="button" class="btn btn-primary" @click="actualizar">Save changes</button>
+								</div>
+							</div>
+						</div>
+					</div>  
+				</div>
+			</div>
+		</main> 
+	</div>
+       
+ 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+	const app = new Vue({
+		el:'#app',
+		data:{
+			creandoViviendas:[
+			
+			],
+
+			editar:false,
+			codigo:'',
+			direccion: '',
+			mz: '',
+			villa: ''
+		},
+		mounted(){
+			this.obtenerVivienda();
+			var user = localStorage.getItem('username');
+        	var user = JSON.parse(user);
+        	document.getElementById('currentUser').innerHTML = user;
+
+			document.getElementById('btnLogout').addEventListener('click', function(){
+            localStorage.removeItem('username');
+            localStorage.removeItem('token');
+            window.location.href = 'index.html';
+			});
+		},
+		methods:{
+			obtenerVivienda(){
+				//Get viviendas from http://localhost:3000/api/viviendas 
+				fetch('http://localhost:3000/api/viviendas',{
+					headers:{
+						'authorization':localStorage.getItem('token')
+					}
+				})
+					.then(response => response.json())
+					.then(data => {
+						for(dato in data){
+							this.creandoViviendas.push(data[dato]);
+						}
+					})
+			},
+			borrarVivienda(index){
+				//Delete vivienda from http://localhost:3000/api/viviendas/delete/:id
+				fetch('http://localhost:3000/api/viviendas/delete/'+this.creandoViviendas[index].id,{
+					method:'DELETE',
+					headers:{
+						'authorization':localStorage.getItem('token')
+					}
+				})
+					.then(response => response.json())
+					.then(data => {
+						this.creandoViviendas.splice(index,1);
+					})
+			},
+			editarVivienda(index){
+				this.editar=true;
+				this.codigo= this.creandoViviendas[index].codigo;
+				this.direccion= this.creandoViviendas[index].direccion;
+				this.mz= this.creandoViviendas[index].mz;
+				this.villa= this.creandoViviendas[index].villa;
+			
+			},
+			actualizar(){
+				// if(this.id != "" && this.codigo !="" && this.direccion != "" && this.mz != "" && this.villa !="" && this.editar){
+				// 	let index = this.indexWhere(this.creandoViviendas , vivienda => vivienda.id == this.id)
+				
+				// 	this.creandoViviendas[index]={codigo:this.codigo, direccion:this.direccion, mz:this.mz, villa:this.villa}
+				// 	this.limpiar();
+				// }
+				//Update vivienda from http://localhost:3000/api/viviendas/update/:id
+				fetch('http://localhost:3000/api/viviendas/update/'+ this.codigo,{
+					method:'PUT',
+					headers:{
+						'Content-Type':'application/json',
+						'authorization':localStorage.getItem('token')
+					},
+					body:JSON.stringify({
+						direccion:this.direccion,
+						mz:this.mz,
+						villa:this.villa
+					})
+				})
+					.then(response => response.json())
+					.then(data => {
+						//Update array where codigo is equal to this.codigo
+						let index = this.indexWhere(this.creandoViviendas , vivienda => vivienda.codigo == this.codigo)
+						this.creandoViviendas[index]={codigo:this.codigo, direccion:this.direccion, mz:this.mz, villa:this.villa}
+						this.limpiar();
+					})
+			},
+			agregarVivienda(){
+				// if(this.codigo != "" &&  this.direccion != "" && this.mz != "" && this.villa !=""){
+				// 	this.creandoViviendas.push({codigo:this.codigo, direccion:this.direccion, mz:this.mz, villa:this.vill})
+				// 	this.limpiar();
+				// }
+				//Add vivienda to http://localhost:3000/api/viviendas/add
+				fetch('http://localhost:3000/api/viviendas/add',{
+					method:'POST',
+					headers:{
+						'Content-Type':'application/json',
+						'authorization':localStorage.getItem('token')
+					},
+					body:JSON.stringify({
+						codigo:this.codigo,
+						direccion:this.direccion,
+						mz:this.mz,
+						villa:this.villa
+					})
+				})
+					.then(response => response.json())
+					.then(data => {
+						this.creandoViviendas.push(data.vivienda);
+						this.limpiar();
+					})
+					
+			},
+			indexWhere(array, conditionFn) {
+				const item = array.find(conditionFn)
+				return array.indexOf(item)
+			},
+
+			limpiar(){
+				this.codigo="";
+				this.direccion="";
+				this.mz="";
+				this.villa="";
+				this.editar=false;
+			}
+		}
+
+	})
+</script>
+
+</body >
+</html>

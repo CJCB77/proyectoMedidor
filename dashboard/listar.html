@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Johlou</title>
+    <!-- BOX ICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="./css/estilos.css">
+    <!-- CUSTOM JS -->
+    <script src="./js/app.js" defer></script>
+</head>
+<body style="background: #eee">
+    <div class="contenedor-division">
+        <div class="wrapper">
+            <nav class="navbar navbar-expand-md navbar-light bg-light py-1">
+                <div class="container-fluid" style="background: center;">
+                    <!-- <button class="btn btn-default" id="btn-slider" type="button">
+                        <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+                    </button> 
+                    < <a class="navbar-brand me-auto text-danger" href="#">Joh<span class="text-warning">Lou</span></a> -->
+                    
+                    <div>
+                        <!-- class="img-user" -->
+                        <img src="./img/jl3.png" alt=""  class="img-user img-fluid">
+                    </div>
+                    <ul class="nav ms-auto">
+                        
+                        <li class="nav-item dropstart">
+                            <a class="nav-link text-dark ps-3 pe-1" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown">
+                                <img src="./img/user.png" alt="user" class="img-user">
+                            </a>
+                            <div class="dropdown-menu mt-2 pt-0" aria-labelledby="navbarDropdown">
+                                <div class="d-flex p-3 border-bottom mb-2">
+                                    <img src="./img/user.png" alt="user" class="img-user me-2">
+                                    <div class="d-block">
+                                        <p class="fw-bold m-0 lh-1" id="currentUser"></p>
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-user fa-lg me-3" aria-hidden="true"></i>Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-cog fa-lg me-3" aria-hidden="true"></i>Ajustes
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="#">
+                                    <button class="btn btn-danger" id="btnLogout" >Cerrar sesion</button>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="menu-dashboard" >
+                <!-- TOP MENU -->
+                <div class="top-menu">
+                    <div class="logo">
+                        <span>Bienvenido Admin</span>
+                    </div>
+                    <div class="toggle">
+                        <i class='bx bx-menu'></i>
+                    </div>
+                </div>
+                
+                <!-- INPUT SEARCH -->
+                <div class="input-search">
+                    <i class='bx bx-search'></i>
+                    <input type="text" class="input" placeholder="Buscar">
+                </div>
+                <!-- MENU -->
+                <div class="menu">
+                    <div class="enlace">
+                        <i class="bx bx-message-square"></i>
+                        <span><a href="main.html">Inicio</a></span>
+
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-user"></i>
+                        <!-- <span>Usuarios</span> -->
+                        <span><a href="usuarios.html">Usuarios</a></span>
+                        
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-grid-alt"></i>
+                        <!-- <span>Listar Regristros</span> -->
+                        <span><a href="#">Listar Registros</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-grid-alt"></i>
+                        <!-- <span>Asignar Tareas</span> -->
+                        <span><a href="asignartareas.html">Asignar Tareas</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-grid-alt"></i>
+                        <!-- <span>Vivienda</span> -->
+                        <span><a href="vivienda.html">Vivenda</a></span>
+                    </div>
+                </div>    
+            </div>
+        </div>
+
+        <main class="espa">
+            <div>
+                <h1 class="tittle dash"> Dashboard </h1>
+            </div>
+            <div class="head-title dash">
+				<div class="left">
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Registros</a>
+						</li>
+					</ul>
+				</div>
+                
+			</div>
+        
+		<div id="app">
+			<div class="container">
+                <div class="col">
+                    <h5>Buscar: </h5>
+                    <input type="text" v-model="buscador">
+                </div>
+				<table class="table table-striped" style="width:100%">
+					<thead>
+						<th style="width: 20%;">Codigo Vivienda</th>
+						<th style="width: 20%;">Lectura</th>
+						<th style="width: 20%;">Usuario</th>
+						<th style="width: 20%;">Fecha modificacion</th>
+                        <th style="width: 10%;"></th>
+						<th style="width: 10%;"></th>
+					</thead>
+					<tbody>
+						<tr v-for="(registro, index) in listadoRegistros">
+							<td style="width: 20%;">{{registro.codigo}}</td>
+							<td style="width: 20%;">{{registro.lectura}}</td>
+							<td style="width: 20%;">{{registro.usuario}}</td>
+                            <td style="width: 20%;">{{registro.fecha}}</td>
+							<td style="width: 10%;"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarModal" @click="visualizarRegistros(index)">Visualizar</button></td>
+							<td style="width: 10%;"><button type="button" class="btn btn-danger" @click="borrarUsuario(index)">Borrar registro</button></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <h5 class="modal-title" id="exampleModalLabel">Modal Editar</h5>
+						  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+						  <div class="row">
+							<div class="col">
+								<h5>Codigo:</h5>
+								<input disabled type="text" v-model="codigo">
+							</div>
+                            <div class="col">
+								<h5>Direccion:</h5>
+								<input disabled type="text" v-model="direccion">
+							</div>
+                            <div class="col">
+								<h5>MZ:</h5>
+								<input disabled type="text" v-model="mz">
+							</div>
+                            <div class="col">
+								<h5>Villa:</h5>
+								<input disabled type="text" v-model="villa">
+							</div>
+                            <div class="col">
+								<h5>Foto:</h5>
+								<img :src="foto" style="height: 200px; width: 200px;">
+							</div>                            
+                            <div class="col">
+								<h5>Foto Procesada:</h5>
+								<img :src="procesada" style="height: 200px; width: 200px;">
+							</div>
+                            <div class="col">
+								<h5>Coordenadas:</h5>
+								<input disabled type="text" v-model="coordenadas">
+							</div>
+						  </div>
+						</div>
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						</div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+        </main> 
+    </div> 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+	const app = new Vue({
+		el:'#app',
+		data:{
+			registros:[
+			
+			],
+            buscador:'',
+			editar:false,
+			id:'',
+			codigo: '',
+            usuario:'',
+            lectura: '',
+            fecha:'',
+            direccion:'',
+            mz:'',
+            villa:'',
+            foto:'',
+            procesada:'',
+            coordenadas:'',
+		},
+		mounted(){
+			this.obtenerRegistros();
+            var user = localStorage.getItem('username');
+            var user = JSON.parse(user);
+        	document.getElementById('currentUser').innerHTML = user;
+
+			document.getElementById('btnLogout').addEventListener('click', function(){
+            localStorage.removeItem('username');
+            localStorage.removeItem('token');
+            window.location.href = 'index.html';
+			});
+		},
+        computed:{
+            listadoRegistros(){
+                if(this.buscador=='')
+                    return this.registros;
+                
+                return this.registros.filter(registro => registro.codigo.includes(this.buscador))
+            }
+        },
+		methods:{
+			obtenerRegistros(){
+                //Fetch registros at http://localhost:3000/api/registros/
+                fetch('http://localhost:3000/api/registros/complete',{
+                    headers:{
+                        'authorization':localStorage.getItem('token')
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        for(dato of data){
+                            //Get codigo
+                            let codigo = dato.codigo_vivienda;
+                            //Get usuario
+                            let usuario = dato.username;
+                            //Get lectura
+                            let lectura = dato.lectura;
+                            //Get fecha
+                            let fecha = dato.fecha_creacion;
+                            //Format timestampz to date
+                            let date = new Date(fecha);
+                            //Format date
+                            let formatedDate = date.toLocaleString();
+                            fecha_formatted= formatedDate;
+                            //Get imagen
+                            let imagen = dato.imagen;
+                            //Get gps
+                            let coordenadas = dato.gps;
+                            //Get direccion
+                            let direccion = dato.direccion;
+                            //Get mz
+                            let mz = dato.mz;
+                            //Get villa
+                            let villa = dato.villa;
+                            //Get procesada
+                            let imgProcesada = dato.imagen_procesada;
+                            console.log(dato.imagen_procesada);
+                            //Push to registros
+                            this.registros.push({
+                                id:dato.id,
+                                codigo:codigo,
+                                usuario:usuario,
+                                lectura:lectura,
+                                fecha:fecha_formatted,
+                                direccion:direccion,
+                                mz:mz,
+                                villa:villa,
+                                foto:imagen,
+                                procesada: imgProcesada,
+                                coordenadas:coordenadas
+                            })
+                        }
+                    })
+			},
+			borrarVivienda(index){
+				this.viviendas.splice(index,1)
+                //post datos al back .then(response=>{this.obtenerVivienda()})
+                
+			},
+			
+			visualizarRegistros(index){
+				this.editar=true;
+				this.id= this.registros[index].id;
+				this.codigo= this.registros[index].codigo;
+				this.lectura= this.registros[index].lectura;
+                this.fecha= this.registros[index].fecha;
+                this.direccion= this.registros[index].direccion;
+                this.mz= this.registros[index].mz;
+                this.villa= this.registros[index].villa;
+                this.foto= this.registros[index].foto;
+                this.procesada= this.registros[index].procesada;
+                this.coordenadas= this.registros[index].coordenadas;
+                
+			},
+		}
+
+	})
+</script>
+</body >
+</html>                               

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Johlou</title>
+    <!-- BOX ICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="./css/estilos.css">
+    <!-- CUSTOM JS -->
+    <script src="./js/app.js" defer></script>
+</head>
+<body style="background: #eee">
+    <div class="contenedor-division">
+        <div class="wrapper">
+            <nav class="navbar navbar-expand-md navbar-light bg-light py-1">
+                <div class="container-fluid" style="background: center;">
+                    <!-- <button class="btn btn-default" id="btn-slider" type="button">
+                        <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+                    </button> 
+                    < <a class="navbar-brand me-auto text-danger" href="#">Joh<span class="text-warning">Lou</span></a> -->
+                    
+                    <div>
+                        <!-- class="img-user" -->
+                        <img src="./img/jl3.png" alt=""  class="img-user img-fluid">
+                    </div>
+                    <ul class="nav ms-auto">
+                        
+                        <li class="nav-item dropstart">
+                            <a class="nav-link text-dark ps-3 pe-1" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown">
+                                <img src="./img/user.png" alt="user" class="img-user">
+                            </a>
+                            <div class="dropdown-menu mt-2 pt-0" aria-labelledby="navbarDropdown">
+                                <div class="d-flex p-3 border-bottom mb-2">
+                                    <img src="./img/user.png" alt="user" class="img-user me-2">
+                                    <div class="d-block">
+                                        <p class="fw-bold m-0 lh-1" id="currentUser"></p>
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-user fa-lg me-3" aria-hidden="true"></i>Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-cog fa-lg me-3" aria-hidden="true"></i>Ajustes
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="#">
+                                    <button class="btn btn-danger" id="btnLogout" >Cerrar sesion</button>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="menu-dashboard" >
+                <!-- TOP MENU -->
+                <div class="top-menu">
+                    <div class="logo">
+                        <span>Bienvenido Admin</span>
+                    </div>
+                    <div class="toggle">
+                        <i class='bx bx-menu'></i>
+                    </div>
+                </div>
+                
+                <!-- INPUT SEARCH -->
+                <div class="input-search">
+                    <i class='bx bx-search'></i>
+                    <input type="text" class="input" placeholder="Buscar">
+                </div>
+                <!-- MENU -->
+                <div class="menu">
+                    <div class="enlace">
+                        <i class="bx bx-message-square"></i>
+                        <span><a href="index.html">Inicio</a></span>
+
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-user"></i>
+                        <!-- <span>Usuarios</span> -->
+                        <span><a href="usuarios.html">Usuarios</a></span>
+                        
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-grid-alt"></i>
+                        <!-- <span>Listar Regristros</span> -->
+                        <span><a href="#">Listar Registros</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-grid-alt"></i>
+                        <!-- <span>Asignar Tareas</span> -->
+                        <span><a href="asignartareas.html">Asignar Tareas</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-grid-alt"></i>
+                        <!-- <span>Vivienda</span> -->
+                        <span><a href="vivienda.html">Vivenda</a></span>
+                    </div>
+                </div>    
+            </div>
+        </div>
+
+        <main class="espa">
+            <div>
+                <h1 class="tittle dash"> Dashboard </h1>
+            </div>
+            <div class="head-title dash">
+				<div class="left">
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Registros</a>
+						</li>
+					</ul>
+				</div>
+                
+			</div>
+        
+		<div id="app">
+			<div class="container">
+                <div class="col">
+                    <h5>Buscar: </h5>
+                    <input type="text" v-model="buscador">
+                </div>
+				<table class="table table-striped" style="width:100%">
+					<thead>
+						<th style="width: 10%;">Id</th>
+						<th style="width: 20%;">Usuario</th>
+						<th style="width: 20%;">Titulo</th>
+						<th style="width: 20%;">Descripcion</th>
+                        <th style="width: 20%;">Fecha creacion</th>
+                        <th style="width: 10%; text-align: center;"><btn class="btn btn-secondary"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar tarea
+                        </btn></th>
+					</thead>
+					<tbody>
+						<tr v-for="(tareas, index) in listadotareas">
+							<td style="width: 10%;">{{tareas.id}}</td>
+							<td style="width: 20%;">{{tareas.usuario}}</td>
+							<td style="width: 20%;">{{tareas.titulo}}</td>
+                            <td style="width: 20%;">{{tareas.descripcion}}</td>
+                            <td style="width: 10%;">{{tareas.fecha_creacion}}</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal Crear</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5>Usuario:</h5>
+                                    <input type="text" v-model="usuario">
+                                </div>
+                                <div class="col">
+                                    <h5>Titulo:</h5>
+                                    <input type="text" v-model="titulo">
+                                </div>
+                                <div class="col">
+                                    <h5>Descripcion:</h5>
+                                    <input type="text"v-model="descripcion">
+                                </div>
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="limpiar">Close</button>
+                                <button type="button" class="btn btn-primary" @click="agregarTarea">Save changes</button>
+                            </div>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+        </main> 
+    </div> 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+	const app = new Vue({
+		el:'#app',
+		data:{
+			asignarTareas:[
+
+			],
+            buscador:'',
+			editar:false,
+			id:'',
+            usuario:'',
+            titulo: '',
+            descripcion:'',
+            fecha_creacion:'',
+		},
+		mounted(){
+			this.obtenerTareas();
+            var user = localStorage.getItem('username');
+            var user = JSON.parse(user);
+        	document.getElementById('currentUser').innerHTML = user;
+
+			document.getElementById('btnLogout').addEventListener('click', function(){
+            localStorage.removeItem('username');
+            localStorage.removeItem('token');
+            window.location.href = 'index.html';
+			});
+		},
+        computed:{
+            listadotareas(){
+                if(this.buscador=='')
+                    return this.asignarTareas
+                
+                return this.asignarTareas.filter(tarea => tarea.usuario.includes(this.buscador))
+            }
+        },
+		methods:{
+			obtenerTareas(){
+               //Fetch tareas at http://localhost:3000/api/tareas/
+                fetch('http://localhost:3000/api/tareas/?username=true',{
+                    headers:{
+                        'authorization':localStorage.getItem('token')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    for(dato in data){
+                        let dateString = data[dato].fecha_creacion
+                        //Parse timestampz to date
+                        let date = new Date(dateString);
+                        //Format date
+                        let formatedDate = date.toLocaleString();
+                        data[dato].fecha_creacion = formatedDate;
+
+                        //Get username
+                        data[dato].usuario = data[dato].username;
+
+                        this.asignarTareas.push(data[dato])
+                    }
+                })
+                .catch(error => console.log(error))
+			},
+            agregarTarea(){
+						// if(this.usuario != "" && this.titulo !="" && this.descripcion!=""){
+						// 	this.asignarTareas.push({usuario:this.usuario, titulo:this.titulo, descripcion:this.descripcion})
+						// 	this.limpiar();
+						// }
+                        //Post tarea at http://localhost:3000/api/tareas/add
+                        let data = {
+                            usuario: this.usuario,
+                            titulo: this.titulo,
+                            descripcion: this.descripcion,
+                        }
+                        console.log(data)
+                        fetch('http://localhost:3000/api/tareas/add', {
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'authorization':localStorage.getItem('token')
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            this.limpiar();
+                            this.obtenerTareas();
+                        })
+							
+					},
+                    limpiar(){
+						this.usuario="";
+						this.titulo="";
+						this.descripcion="";
+						this.fecha_creacion="";
+					}
+		}
+
+	})
+</script>
+</body >
+</html>                               
